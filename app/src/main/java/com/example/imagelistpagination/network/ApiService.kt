@@ -2,7 +2,6 @@ package com.example.imagelistpagination.network
 
 import com.example.imagelistpagination.model.ImageDetailResponse
 import com.example.imagelistpagination.model.ImageListResponse
-import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

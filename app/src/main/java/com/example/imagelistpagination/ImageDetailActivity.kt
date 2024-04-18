@@ -33,7 +33,6 @@ class ImageDetailActivity : AppCompatActivity(), View.OnClickListener {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        // Set navigation click listener on toolbar
         binding.toolbar.setNavigationOnClickListener {
             onBackPressed()
         }

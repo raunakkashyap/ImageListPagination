@@ -3,8 +3,8 @@ package com.example.imagelistpagination
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.imagelistpagination.adapter.ImageAdapter
@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity() {
 
         adapter =  ImageAdapter { image ->
             // Handle item click here
-            // For example, you can show a toast with the author's name
             val intent = Intent(this@MainActivity, ImageDetailActivity::class.java)
             intent.putExtra("image_id", image.id) // Pass any necessary data to ImageDetailActivity
             startActivity(intent)
@@ -65,6 +64,20 @@ class MainActivity : AppCompatActivity() {
         imageViewModel.imageList.observe(this) { imageList ->
             updateAdapter(imageList)
             isLoading = false
+        }
+
+        imageViewModel.loading.observe(this) { loading ->
+            if (!binding.progressBarMain.isVisible){
+                if (loading) {
+                    binding.progressBar.visibility = View.VISIBLE
+                } else {
+                    binding.progressBar.visibility = View.GONE
+                }
+            }
+            else {
+                binding.progressBar.visibility = View.GONE
+            }
+
         }
     }
 

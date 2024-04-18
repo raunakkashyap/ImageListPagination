@@ -6,11 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.imagelistpagination.model.ImageDetailResponse
 import com.example.imagelistpagination.model.ImageListResponse
-import com.example.imagelistpagination.network.ApiService
 import com.example.imagelistpagination.repository.ImageRepository
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 
 class ImageListingViewModel(private val repository: ImageRepository) : ViewModel(), KoinComponent {
 

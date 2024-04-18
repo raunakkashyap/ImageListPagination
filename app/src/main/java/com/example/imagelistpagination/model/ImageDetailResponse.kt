@@ -2,7 +2,6 @@ package com.example.imagelistpagination.model
 
 import com.google.gson.annotations.SerializedName
 
-
 data class ImageDetailResponse (
 
     @SerializedName("id") var id : String,
