@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ImageDetailActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimaryDark"
+        app:navigationIcon="@drawable/arrow_back"
+        app:title="Image Detail"
+        app:titleTextColor="@android:color/white"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/imageCV"
+        android:layout_margin="12dp"
+        app:cardCornerRadius="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:background="@drawable/image_top_round"
+            />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/authorTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Author Name : "
+        android:textSize="18sp"
+        android:gravity="start"
+        android:padding="8dp"
+        android:textStyle="bold"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="12dp"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/downloadUrlTV"
+        app:layout_constraintTop_toBottomOf="@id/imageCV" />
+    <TextView
+        android:id="@+id/authorNameTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:gravity="start"
+        android:padding="8dp"
+        android:layout_marginEnd="12dp"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toEndOf="@+id/authorTV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/authorTV"
+        app:layout_constraintBottom_toBottomOf="@+id/authorTV"/>
+    <TextView
+        android:id="@+id/heightTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Height : "
+        android:textSize="18sp"
+        android:gravity="start"
+        android:textStyle="bold"
+
+        android:layout_marginStart="12dp"       android:layout_marginTop="12dp"
+        android:padding="8dp"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/downloadUrlTV"
+        app:layout_constraintTop_toBottomOf="@id/authorTV" />
+    <TextView
+        android:id="@+id/heightDataTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:gravity="start"
+        android:padding="8dp"
+        android:layout_marginEnd="12dp"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toEndOf="@+id/heightTV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/heightTV"
+        app:layout_constraintBottom_toBottomOf="@+id/heightTV"/>
+    <TextView
+        android:id="@+id/widthTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Width : "
+        android:textSize="18sp"
+        android:gravity="start"
+        android:textStyle="bold"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="12dp"
+        android:padding="8dp"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/downloadUrlTV"
+        app:layout_constraintTop_toBottomOf="@id/heightTV" />
+    <TextView
+        android:id="@+id/widthDataTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:gravity="start"
+        android:padding="8dp"
+        android:layout_marginEnd="12dp"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toEndOf="@+id/widthTV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/widthTV"
+        app:layout_constraintBottom_toBottomOf="@+id/widthTV"/>
+    <TextView
+        android:id="@+id/urlTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Site Url : "
+        android:textSize="18sp"
+        android:gravity="start"
+        android:textStyle="bold"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="12dp"
+        android:padding="8dp"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="@+id/downloadUrlTV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/widthTV" />
+    <TextView
+        android:id="@+id/urlDataTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:gravity="start"
+        android:padding="8dp"
+        android:layout_marginEnd="12dp"
+        android:textColor="@android:color/holo_blue_dark"
+        app:layout_constraintStart_toEndOf="@+id/urlTV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/urlTV"
+        app:layout_constraintBottom_toBottomOf="@+id/urlTV"/>
+    <TextView
+        android:id="@+id/downloadUrlTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Download Url : "
+        android:textSize="18sp"
+        android:gravity="start"
+        android:textStyle="bold"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="12dp"
+        android:padding="8dp"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/urlTV" />
+    <TextView
+        android:id="@+id/downloadUrlDataTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:gravity="start"
+        android:padding="8dp"
+        android:layout_marginEnd="12dp"
+        android:textColor="@android:color/holo_blue_dark"
+        app:layout_constraintStart_toEndOf="@+id/downloadUrlTV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/downloadUrlTV"
+        app:layout_constraintBottom_toBottomOf="@id/downloadUrlTV"/>
+
+    <ProgressBar
+        android:id="@+id/progressBarMain"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

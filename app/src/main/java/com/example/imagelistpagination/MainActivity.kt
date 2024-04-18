@@ -1,46 +1,76 @@
 package com.example.imagelistpagination
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.imagelistpagination.ui.theme.ImageListPaginationTheme
+import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.imagelistpagination.adapter.ImageAdapter
+import com.example.imagelistpagination.databinding.ActivityMainBinding
+import com.example.imagelistpagination.model.ImageListResponse
+import org.koin.android.ext.android.inject
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding : ActivityMainBinding
+
+    private val imageViewModel: ImageListingViewModel by inject()
+
+    private lateinit var adapter: ImageAdapter
+
+    private var isLoading = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            ImageListPaginationTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+
+        binding.progressBarMain.visibility = View.VISIBLE
+
+        adapter =  ImageAdapter { image ->
+            // Handle item click here
+            // For example, you can show a toast with the author's name
+            val intent = Intent(this@MainActivity, ImageDetailActivity::class.java)
+            intent.putExtra("image_id", image.id) // Pass any necessary data to ImageDetailActivity
+            startActivity(intent)
+        }
+
+        binding.imageListRV.layoutManager = LinearLayoutManager(this)
+        binding.imageListRV.adapter = adapter
+
+        observeViewModel()
+
+        // Implement pagination logic
+        binding.imageListRV.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
+                val totalItemCount = layoutManager.itemCount
+                if (!isLoading && lastVisibleItemPosition == totalItemCount - 1) {
+                    // Reached end of list, load more data
+                    imageViewModel.loadNextPage()
+                    isLoading = true
                 }
             }
+        })
+
+    }
+
+    private fun observeViewModel() {
+        imageViewModel.imageList.observe(this) { imageList ->
+            updateAdapter(imageList)
+            isLoading = false
         }
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ImageListPaginationTheme {
-        Greeting("Android")
+    private fun updateAdapter(imageList: List<ImageListResponse>) {
+        adapter.setData(imageList)
+        binding.progressBarMain.visibility = View.GONE
     }
 }
+
